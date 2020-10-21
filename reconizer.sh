@@ -134,6 +134,23 @@ cat ~/recon/$1/unique.txt
 echo "${yellow} ---------------------------------- xxxxxxxx ---------------------------------- ${reset}"
 echo ""
 echo "${blue} [+] Succesfully saved to unique.txt ${reset}"
+#SUBZY
+echo "${yellow} ---------------------------------- xxxxxxxx ---------------------------------- ${reset}"
+echo " Checking for Subdomain takeovers"
+echo " "
+if [ -f ~/go/bin/subzy ]
+then
+  echo "${magenta} [+] Running Subzy ${reset}"
+  subzy -targets ~/recon/$1/unique.txt | tee subzy_results.txt
+else
+  echo "${blue} [+] Installing SubZy ${reset}"
+  echo "${magenta} [+] Running subZy ${reset}"
+ go get -u github.com/lukasikic/subzy
+ subzy -targets ~/recon/$1/unique.txt | tee subzy_results.txt
+fi
+echo " "
+echo "${blue} [+] Succesfully saved to subzy_results.txt  ${reset}"
+echo " "
 #nuclei
 echo "${yellow} ---------------------------------- xxxxxxxx ---------------------------------- ${reset}"
 echo " "
